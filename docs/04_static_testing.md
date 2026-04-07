@@ -11,6 +11,9 @@
 - Signal length가 요구 상태 수를 충분히 표현할 수 있는지
 - 값 표현 방식이 요구사항과 일치하는지
 - Signal 명과 Description이 동일한 의미를 가지는지
+- 앞선 정의가 뒤 페이지의 요구사항 사용 방식과 충돌하지 않는지
+
+> 각 결함 항목에는 추적성을 위해 **근거가 된 페이지**와 **결함 또는 영향이 드러난 페이지**를 함께 표기했다.
 
 ---
 
@@ -26,6 +29,9 @@ Signal이 요구사항에 정의된 상태 수를 충분히 표현할 수 있는
 
 ### 2.3 Signal Name / Description Consistency
 Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
+
+### 2.4 Traceability to Later Requirements
+앞에서 정의된 Signal/값이 뒤 페이지에서 실제 요구사항에 사용될 때 충돌이 없는지 확인했다.
 
 ---
 
@@ -44,9 +50,23 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 
 ## 4.1 Defect 1 - Ignition_sts Signal Length Mismatch
 
-<p align="center">
-  <img src="./assets/images/static_defect_01_ignition_signal_length.png" alt="Ignition_sts Signal Length Mismatch" width="820">
-</p>
+### Traceability
+- Source Document: `reports/defect_analysis.pdf`
+- Requirement Reference: p.7
+- Related Usage / Impact Reference: p.30
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_req_01_ignition_signal_p7.png" alt="Requirement Reference p7" width="420"><br>
+      <sub><b>Requirement Reference (p.7)</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_ref_01_ignition_usage_p30.png" alt="Related Usage Reference p30" width="420"><br>
+      <sub><b>Related Usage / Impact (p.30)</b></sub>
+    </td>
+  </tr>
+</table>
 
 ### Issue
 `Ignition_sts`는 Description상 `Off / On / Error`의 3가지 상태를 표현해야 하지만, 메시지 정의에서는 1bit로 설정되어 있어 모든 상태를 표현할 수 없는 문제가 있었다.
@@ -55,7 +75,7 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 1bit는 최대 2가지 상태만 표현할 수 있으므로, 3가지 상태를 요구하는 Signal 정의와 충돌한다.
 
 ### Impact
-이 문제는 단순 정의 오류가 아니라, 이후 Ignition Error 관련 Fault 검출 요구사항을 만족하지 못하게 만들 수 있다.
+이 문제는 단순 정의 오류가 아니라, 뒤 페이지에서 요구하는 `Ignition Error` 관련 검출 요구사항과 연결될 때 요구조건을 만족하지 못하게 만들 수 있다.
 
 ### Suggested Improvement
 해당 Signal의 length를 최소 2bit로 수정해야 한다.
@@ -64,12 +84,26 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 
 ## 4.2 Defect 2 - Value Representation Mismatch (Case 1)
 
-<p align="center">
-  <img src="./assets/images/static_defect_02_value_representation_case1.png" alt="Value Representation Mismatch Case 1" width="820">
-</p>
+### Traceability
+- Source Document: `reports/defect_analysis.pdf`
+- Defect Reference: p.10
+- Related Usage / Reference Page: p.30
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_defect_02_value_case1_p10.png" alt="Value Representation Mismatch p10" width="420"><br>
+      <sub><b>Defect Reference (p.10)</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_ref_02_value_reference_p30.png" alt="Reference Page p30" width="420"><br>
+      <sub><b>Related Reference Page (p.30)</b></sub>
+    </td>
+  </tr>
+</table>
 
 ### Issue
-요구사항에서 사용한 상태값 기준과 비교했을 때, `127`과 `0x7f`의 표현이 일관되지 않게 사용된 부분이 있었다.
+요구사항과 비교했을 때 `127`과 `0x7f`의 표현이 일관되지 않게 사용된 부분이 있었다.
 
 ### Why It Is a Defect
 `127`은 16진수로 `0x7f`와 같은 값이지만, 문서와 정의에서 표현 기준이 다르면 동일한 상태를 서로 다른 값처럼 해석할 가능성이 생긴다.
@@ -86,9 +120,23 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 
 ## 4.3 Defect 3 - Value Representation Mismatch (Case 2)
 
-<p align="center">
-  <img src="./assets/images/static_defect_03_value_representation_case2.png" alt="Value Representation Mismatch Case 2" width="820">
-</p>
+### Traceability
+- Source Document: `reports/defect_analysis.pdf`
+- Defect Reference: p.11
+- Related Usage / Reference Page: p.30
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_defect_03_value_case2_p11.png" alt="Value Representation Mismatch p11" width="420"><br>
+      <sub><b>Defect Reference (p.11)</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_ref_03_value_reference_p30.png" alt="Reference Page p30" width="420"><br>
+      <sub><b>Related Reference Page (p.30)</b></sub>
+    </td>
+  </tr>
+</table>
 
 ### Issue
 다른 항목에서도 동일하게 `127`과 `0x7f` 표현 불일치가 확인되었다.
@@ -97,9 +145,9 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 표현 방식이 일관되지 않으면, 테스트 설계와 요구사항 해석 과정에서 혼동이 발생한다.
 
 ### Impact
-- 동일한 타입의 결함이 여러 항목에서 반복될 수 있음을 보여준다.
+- 동일한 유형의 해석 오류가 여러 항목에서 반복될 수 있다.
 - 단일 오타가 아니라 정의 방식 전반의 일관성 문제일 수 있다.
-- 추후 유지보수 시 같은 유형의 해석 오류를 반복할 위험이 있다.
+- 추후 유지보수 시 같은 유형의 오류를 반복할 위험이 있다.
 
 ### Suggested Improvement
 해당 항목 역시 값 표현 기준을 `0x7f`로 통일해 문서와 정의의 일관성을 확보해야 한다.
@@ -108,9 +156,23 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 
 ## 4.4 Defect 4 - Brake_Err_sts Description Mismatch
 
-<p align="center">
-  <img src="./assets/images/static_defect_04_brake_err_description.png" alt="Brake_Err_sts Description Mismatch" width="820">
-</p>
+### Traceability
+- Source Document: `reports/defect_analysis.pdf`
+- Correct Reference Page: p.18
+- Defect Reference Page: p.19
+
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_ref_04_correct_accel_description_p18.png" alt="Correct Reference p18" width="420"><br>
+      <sub><b>Correct Reference (p.18)</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="../assets/images/static_defect_04_brake_description_p19.png" alt="Description Mismatch p19" width="420"><br>
+      <sub><b>Defect Reference (p.19)</b></sub>
+    </td>
+  </tr>
+</table>
 
 ### Issue
 `Brake_Err_sts` Signal의 Description이 `Accel Press State`로 기재되어 있어 Signal 명과 설명이 서로 다른 의미를 가졌다.
