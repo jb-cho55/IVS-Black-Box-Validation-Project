@@ -87,7 +87,7 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 ### Traceability
 - Source Document: `reports/defect_analysis.pdf`
 - Defect Reference: p.10
-- Related Usage / Reference Page: p.30
+- Related Usage / Reference Page: p.32
 
 <table>
   <tr>
@@ -96,8 +96,8 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
       <sub><b>Defect Reference (p.10)</b></sub>
     </td>
     <td align="center" width="50%">
-      <img src="../assets/images/static_ref_02_value_reference_p30.png" alt="Reference Page p30" width="420"><br>
-      <sub><b>Related Reference Page (p.30)</b></sub>
+      <img src="../assets/images/static_ref_02_value_reference_p32.png" alt="Reference Page p32" width="420"><br>
+      <sub><b>Related Reference Page (p.32)</b></sub>
     </td>
   </tr>
 </table>
@@ -123,7 +123,7 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
 ### Traceability
 - Source Document: `reports/defect_analysis.pdf`
 - Defect Reference: p.11
-- Related Usage / Reference Page: p.30
+- Related Usage / Reference Page: p.32
 
 <table>
   <tr>
@@ -132,8 +132,8 @@ Signal 이름과 Description이 같은 대상을 설명하는지 검토했다.
       <sub><b>Defect Reference (p.11)</b></sub>
     </td>
     <td align="center" width="50%">
-      <img src="../assets/images/static_ref_03_value_reference_p30.png" alt="Reference Page p30" width="420"><br>
-      <sub><b>Related Reference Page (p.30)</b></sub>
+      <img src="../assets/images/static_ref_03_value_reference_p32.png" alt="Reference Page p32" width="420"><br>
+      <sub><b>Related Reference Page (p.32)</b></sub>
     </td>
   </tr>
 </table>
