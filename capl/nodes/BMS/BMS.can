@@ -1,0 +1,39 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+    msTimer t_10ms;
+    message BATT_01_10ms msg;
+}
+
+on start{
+  msg.Batt_Percent = 0;
+  msg.Batt_Chg_Sts = 0;
+  msg.Batt_Voltage = 0;
+  
+  setTimerCyclic(t_10ms, 10);
+}
+
+
+
+on timer t_10ms{
+  output(msg);
+}
+
+on sysvar Sensors::Batt_Percent{
+  msg.Batt_Percent = @this;
+}
+
+on sysvar Sensors::Batt_Voltage{
+  msg.Batt_Voltage = @this;
+}
+
+on sysvar Sensors::Batt_Chg_Sts{
+  msg.Batt_Chg_Sts = @this;
+}
+
+
