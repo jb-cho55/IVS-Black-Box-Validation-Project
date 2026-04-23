@@ -1,0 +1,40 @@
+﻿/*@!Encoding:65001*/
+includes
+{
+  
+}
+
+variables
+{
+  message IGN_01_2ms msg_1;
+  message ENG_02_10ms msg_2;
+  
+  msTimer t_02ms;
+  msTimer t_10ms;
+}
+
+on start{
+  msg_1.Ignition_sts = 0;
+  msg_2.Engine_sts = 0;
+  
+  setTimerCyclic(t_02ms,2);
+  setTimerCyclic(t_10ms,10);
+}
+
+on timer t_02ms{
+  output(msg_1);
+}
+
+on timer t_10ms{
+  output(msg_2);
+}
+
+on sysvar Sensors::Ignition_sts{
+  msg_1.Ignition_sts = @this;
+}
+
+on sysvar Sensors::Engine_sts{
+  msg_2.Engine_sts = @this;
+}
+
+
